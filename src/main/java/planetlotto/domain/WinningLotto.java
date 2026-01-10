@@ -9,4 +9,8 @@ public class WinningLotto {
     public WinningLotto(List<Integer> numbers) {
         this.numbers = numbers;
     }
+
+    public void addBonusNumber(int bonusNumber) {
+        this.bonusNumber = bonusNumber;
+    }
 }
