@@ -13,4 +13,12 @@ public class WinningLotto {
     public void addBonusNumber(int bonusNumber) {
         this.bonusNumber = bonusNumber;
     }
+
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
+
+    public int getBonusNumber() {
+        return bonusNumber;
+    }
 }
