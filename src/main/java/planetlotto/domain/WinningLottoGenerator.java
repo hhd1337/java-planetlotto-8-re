@@ -2,14 +2,10 @@ package planetlotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import planetlotto.util.DelimiterParser;
 
 public class WinningLottoGenerator {
-    private static final String DELIMITER = ",";
 
-    public WinningLotto generateWiningLottos(String numberString) {
-        DelimiterParser delimiterParser = new DelimiterParser();
-        List<Integer> numbers = delimiterParser.parse(numberString, DELIMITER);
+    public WinningLotto generateWiningLottos(List<Integer> numbers) {
 
         List<Integer> winningLottoList = new ArrayList<>();
 
