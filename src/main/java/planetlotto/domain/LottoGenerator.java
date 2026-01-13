@@ -1,15 +1,17 @@
 package planetlotto.domain;
 
+import static planetlotto.domain.LottoRule.LOTTO_MAX_NUMBER;
+import static planetlotto.domain.LottoRule.LOTTO_MIN_NUMBER;
+import static planetlotto.domain.LottoRule.LOTTO_SIZE;
+
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGenerator {
 
-    private static final int PRICE_PER_LOTTO = 500;
-
     public MyLottos generateLottos(int amount) {
-        int lottoCount = amount / PRICE_PER_LOTTO;
+        int lottoCount = amount / LottoRule.PRICE_PER_LOTTO;
         List<MyLotto> myLottoList = new ArrayList<>();
 
         for (int i = 0; i < lottoCount; i++) {
@@ -21,7 +23,7 @@ public class LottoGenerator {
     }
 
     public MyLotto generateLotto() {
-        List<Integer> numbers = Randoms.pickUniqueNumbersInRange(1, 30, 5);
+        List<Integer> numbers = Randoms.pickUniqueNumbersInRange(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER, LOTTO_SIZE);
 
         return new MyLotto(numbers);
     }
