@@ -27,7 +27,7 @@ public class LottoResultCalculator {
 
     private LottoRank calculateLottoRank(MyLotto myLotto, WinningLotto winningLotto) {
         int matchCount = countMatchingNumbers(myLotto, winningLotto);
-        boolean bonusMatch = myLotto.getNumbers().contains(winningLotto.getBonusNumber());
+        boolean bonusMatch = myLotto.containsBonus(winningLotto.getBonusNumber());
 
         return LottoRank.findRankByMatchCountAndBonus(matchCount, bonusMatch);
     }
