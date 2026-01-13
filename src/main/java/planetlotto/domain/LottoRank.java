@@ -1,12 +1,14 @@
 package planetlotto.domain;
 
+import java.util.Arrays;
+
 public enum LottoRank {
 
     FIRST(5, false, 100_000_000),
     SECOND(4, true, 10_000_000),
     THIRD(4, false, 1_500_000),
-    FOURTH(3, false, 500_000),
-    FIFTH(2, false, 5_000),
+    FOURTH(3, true, 500_000),
+    FIFTH(2, true, 5_000),
     MISS(0, false, 0);
 
     private final int matchCount;
@@ -20,21 +22,10 @@ public enum LottoRank {
     }
 
     public static LottoRank findRankByMatchCountAndBonus(int matchCount, boolean isBonusNumMatches) {
-        if (matchCount == 5) {
-            return FIRST;
-        }
-        if (matchCount == 4 && isBonusNumMatches) {
-            return SECOND;
-        }
-        if (matchCount == 4) {
-            return THIRD;
-        }
-        if (matchCount == 3) {
-            return FOURTH;
-        }
-        if (matchCount == 2) {
-            return FIFTH;
-        }
-        return MISS;
+        return Arrays.stream(LottoRank.values())
+                .filter(rank -> rank.matchCount == matchCount)
+                .filter(rank -> rank.isBonusNumMatches == isBonusNumMatches)
+                .findFirst()
+                .orElse(MISS);
     }
 }
