@@ -1,10 +1,8 @@
 package planetlotto.domain;
 
 import java.util.EnumMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class LottoResultCalculator {
     public LottoResult calculateLottoResult(MyLottos myLottos, WinningLotto winningLotto) {
@@ -26,24 +24,10 @@ public class LottoResultCalculator {
     }
 
     private LottoRank calculateLottoRank(MyLotto myLotto, WinningLotto winningLotto) {
-        int matchCount = countMatchingNumbers(myLotto, winningLotto);
+        int matchCount = myLotto.countMatchesWith(winningLotto);
         boolean bonusMatch = myLotto.containsBonus(winningLotto.getBonusNumber());
 
         return LottoRank.findRankByMatchCountAndBonus(matchCount, bonusMatch);
-    }
-
-    private int countMatchingNumbers(MyLotto myLotto, WinningLotto winningLotto) {
-        List<Integer> myLottoNumbers = myLotto.getNumbers();
-        List<Integer> winningLottoNumbers = winningLotto.getNumbers();
-
-        Set<Integer> set = new HashSet<>(winningLottoNumbers);
-        int count = 0;
-        for (int number : myLottoNumbers) {
-            if (set.contains(number)) {
-                count++;
-            }
-        }
-        return count;
     }
 
     private Map<LottoRank, Integer> initWinCounts() {
