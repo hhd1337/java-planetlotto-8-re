@@ -8,6 +8,7 @@ import planetlotto.domain.MyLottos;
 import planetlotto.domain.WinningLotto;
 import planetlotto.domain.WinningLottoGenerator;
 import planetlotto.view.OutputView;
+import planetlotto.view.formatter.LottoResultFormatter;
 
 public class PlanetLottoController {
     private final InputHandler inputHandler;
@@ -15,17 +16,20 @@ public class PlanetLottoController {
     private final WinningLottoGenerator winningLottoGenerator;
     private final LottoResultCalculator lottoResultCalculator;
     private final LottosToDoubleListConverter doubleListconverter;
+    private final LottoResultFormatter lottoResultFormatter;
 
     public PlanetLottoController(InputHandler inputHandler,
                                  LottoGenerator lottoGenerator,
                                  WinningLottoGenerator winningLottoGenerator,
                                  LottoResultCalculator lottoResultCalculator,
-                                 LottosToDoubleListConverter doubleListconverter) {
+                                 LottosToDoubleListConverter doubleListconverter,
+                                 LottoResultFormatter lottoResultFormatter) {
         this.inputHandler = inputHandler;
         this.lottoGenerator = lottoGenerator;
         this.winningLottoGenerator = winningLottoGenerator;
         this.lottoResultCalculator = lottoResultCalculator;
         this.doubleListconverter = doubleListconverter;
+        this.lottoResultFormatter = lottoResultFormatter;
     }
 
     public void process() {
@@ -38,7 +42,7 @@ public class PlanetLottoController {
         winningLotto.addBonusNumber(inputHandler.askBonusNumber());
 
         LottoResult lottoResult = lottoResultCalculator.calculateLottoResult(myLottos, winningLotto);
-        OutputView.printResult(lottoResult.getCountsByRankInt());
+        OutputView.printResult(lottoResultFormatter.toIntRankMapForOutput(lottoResult));
     }
 
 }

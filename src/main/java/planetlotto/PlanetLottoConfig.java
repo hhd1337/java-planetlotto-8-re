@@ -6,6 +6,7 @@ import planetlotto.converter.LottosToDoubleListConverter;
 import planetlotto.domain.LottoGenerator;
 import planetlotto.domain.LottoResultCalculator;
 import planetlotto.domain.WinningLottoGenerator;
+import planetlotto.view.formatter.LottoResultFormatter;
 
 public class PlanetLottoConfig {
 
@@ -15,6 +16,7 @@ public class PlanetLottoConfig {
     private WinningLottoGenerator winningLottoGenerator;
     private LottoResultCalculator lottoResultCalculator;
     private LottosToDoubleListConverter doubleListconverter;
+    private LottoResultFormatter lottoResultFormatter;
 
 
     public InputHandler inputHandler() {
@@ -52,10 +54,17 @@ public class PlanetLottoConfig {
         return doubleListconverter;
     }
 
+    public LottoResultFormatter lottoResultFormatter() {
+        if (lottoResultFormatter == null) {
+            lottoResultFormatter = new LottoResultFormatter();
+        }
+        return lottoResultFormatter;
+    }
+
     public PlanetLottoController planetLottoController() {
         if (planetlottoController == null) {
             planetlottoController = new PlanetLottoController(inputHandler(), lottoGenerator(), winningLottoGenerator(),
-                    lottoResultCalculator(), doubleListconverter());
+                    lottoResultCalculator(), doubleListconverter(), lottoResultFormatter());
         }
         return planetlottoController;
     }
