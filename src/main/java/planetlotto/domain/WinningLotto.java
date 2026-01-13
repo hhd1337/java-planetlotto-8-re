@@ -4,7 +4,7 @@ import java.util.List;
 
 public class WinningLotto {
     private List<Integer> numbers;
-    int bonusNumber;
+    private int bonusNumber;
 
     public WinningLotto(List<Integer> numbers) {
         this.numbers = numbers;
